@@ -1,0 +1,83 @@
+NICHOLAS WEEKES
+CS 325
+			QUIZ 2
+The table shows the execution time in seconds, with 100,000,000 instructions executed in each of the four programs. 
+1.	Calculate the MIPS values for each computer for each program.
+•	MIPS = (100/T )=  (100/ 1) =>100
+MIPS for Computer A/ Program 1 is 100
+•	MIPS = (100/T) = ( 100/1000) => 0.1
+MIPS for computer A / Program 2 is 0.1
+•	MIPS = (100/T) = (100/500) => 0.2
+MIPS for computer A  / Program 3 is  0.2
+•	MIPS = (100/T) = ( 100/100) => 1
+MIPS for computer A/ Program 4 is 1
+•	MIPS = (100/T) = (100/10) => 10
+MIPS for computer B / Program 1 is 10
+•	MIPS = (100/T) = ( 100/100) => 1
+MIPS for Computer B / Program 2 is 1
+•	MIPS = (100/T) = (100/1000) => 0.1
+MIPS for computer B/ Program 3 is 0.1
+•	MIPS = (100/T) = ( 100/800) => 0.125
+MIPS for computer B/ Program 4 is 0.125
+•	MIPS = (100/T) = ( 100/20) => 5
+
+MIPS for computer C/ Program 1 is 5
+•	MIPS = (100/T) = ( 100/5) => 5
+MIPS for computer C/ Program 2 is 5
+
+
+•	MIPS = (100/T) = ( 100/50) => 2
+MIPS for computer C/ Program 3 is 2
+•	MIPS = (100/T) = ( 100/100) => 1
+MIPS for computer C/ Program 4 is 1
+	      COMPUTER A	COMPUTER B	COMPUTER C
+Program 1	100	            10	       5
+PROGRAM 2	0.1	            1          5
+PROGRAM 3	0.2         	0.1	       2
+PROGRAM 4	1	           0.125	   1
+
+
+2.	Calculate the arithmetic means assuming equal weights for the four programs. 
+
+Cumulative Sum/ Total count
+Arithmetic mean = (100)+(0.1)+(0.2)+(1)/(4)
+=101.3/4 = 25.325
+Computer A MIPS: 25.325
+Arithmetic mean = (10) +(1) + (0.1) + (0.125)/(4)
+= 11.225/4 = 2.80
+Computer B MIPS is: 2.80
+Arithmetic mean = (5) + (5) + (2) + (1)/(4)
+= 13/4 = 3.25
+Computer C MIPS is: 3.25
+Computer name	A.M.	Rank
+A	25.325	1
+B	2.8	3
+C	3.25	2
+
+3.	Calculate the harmonic means assuming equal weights for the four programs. 
+H.M. = NUMBER OF PROGRAMS/RECIPROCAL OF MIPS VALUES
+Computer A:
+(4)/ (1/100) + (1/0.1) + (1/ (0.2) + (1/1)
+= (4) / (0.01 + 10 + 5 + 1)
+= (4) / (16.01)
+= 0.25
+H.M. for computer A is: 0.25
+Computer B:
+(4) / (1/10) + (1/1) + (1/ 0.1) + (1/0.125)
+=(4) / (0.1) +(1) + (10) + (8)
+= (4) / (19.01)
+= 0.21
+H.M. for computer B is: 0.21
+Computer C:
+= (4) / (1/5) +(1/5) +(1/2) +(1/1)
+= (4) / (0.2) + (0.2) + (0.2) + (1)
+= (4) / (1.6)
+= 2.5
+H.M. for computer C is: 2.5
+Computer name	H.M.	RANK
+A	            0.25	2
+B	            0.21	3
+C	             2.5	1
+
+
+

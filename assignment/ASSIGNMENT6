@@ -1,0 +1,87 @@
+/*
+Nicholas Weekes
+CS 325
+04/16/20
+            ASSIGNMENT 6
+1). Consider two microprocessors having 8-bit and 16-bit wide external
+ data buses, respectively. The two processors are identical, otherwise and
+ their bus cycles take just as long
+
+ a). If all instructions and operands are two bytes long, by what factor
+ do the maximum data transfer rates differ?
+
+ - The maximum data transfer rate differ is approximately a ratio of 1.2, because
+ 16 bites is twice the clock cycle  of a 8 byte which runs 2 bytes per minute.
+
+ b). If half the instructions and operands are one bytes long, by what factor
+  do the maximum data transfer rates differ?
+  - The data transfer rate of 50 because 50 is enough for the bus cycle to
+   transfer to the operand.
+*/
+/*
+2). If a 32-bit microprocessor having 32-bit instructions which consists
+of a 1 byte opcode and the remainder either an operand or the address of the operand
+
+a). what is the maximum directly addressable memory capacity (in bytes)?
+
+b). how many bits are needed for the program counter and the instruction register?
+*/
+/*
+3). Write an int C++ function named DataBusTransfer() that takes an ifstream
+reference parameter, of- stream reference parameter and an int parameter named
+memory, cpu and width respectively. Given that memory references a file that
+consisting of only of 1s and 0s and width is positive, the function writes a
+line of read characters from memory into cpu every time width number of characters
+are read from memory or when you reached the end of the file of memory.
+Afterwards, the function returns the number of lines it wrote in cpu
+*/
+#include<iostream>
+#include<string>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int DataBusTransfer(ifstream& memory,ofstream& cpu,int width){  // The C++ implentation of the DataBusTRansfer function
+   string out=""; // Processing the characters of the function and storing it in the cpu
+
+   // variable count to store number of lines written
+   int count = 0; // Counting each new line and the new variable that is created
+   int WidthCount=0;   // Number of characters read
+
+
+   char ch; // function for stored charcters
+   while(memory.get(ch)){ // reading and processing the character files
+       out += ch;
+       WidthCount++;   // increase WidthCount
+
+       if(WidthCount == width){ //Instructs the cpu and increase count
+           cpu<<out<<endl;
+           count++;
+           WidthCount = 0; // make WidthCount = 0
+           out = "";
+       }
+   } // end of file
+
+
+   if(out != ""){ // write the out in the cpu if it is not empty and increases count
+       cpu<<out<<endl;
+       count++;
+   }
+   return count;
+}
+
+int main(){ // main function for beta-test
+
+   ifstream input("input.txt");   // input.txt
+
+
+   ofstream output("output.txt");  // output.txt
+
+   int cnt = DataBusTransfer(input,output,5); // function call
+   cout<<"count = "<<cnt<<endl; // output the count and display on screen
+
+   return 0; // standard return function
+}
+return lines;
+
+}
