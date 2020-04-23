@@ -1,6 +1,7 @@
 /*1. Brieﬂy characterize Amdahl’s law and Little’s law.
  Amdahl's law is a specific formula that  is used to implement into the system to improve the Operating System.
  Whereas Little'sLaw play the part of managing the operations of the computer system*/
+
  /*2. CPI= (Instruction Count) (Cycles Per Second)/ (Number of Instructions consisted by the executed program)
  (IA)+(DT)+(FP)+(CT)/ (Number of instructioons executed by the program)
  (45000 x 1) + (32,000 x 2) + (15,000 x 2) + (8,000 x 2)/ (100,000)
@@ -280,7 +281,7 @@ int HasHigherPrecedence(char op1, char op2)
 
 
 
-	// If operators have equal precedence, return true if they are left associative.
+	// If operators have equal precedence, return true.
 
 	// return false, if right associative.
 
