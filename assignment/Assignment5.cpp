@@ -30,7 +30,7 @@ Cs 325
   - In the second approach, the interrupts are classified based on properties. The interrupt  with a high prority
   is allowed to cause a low priority interrupt handler to interrupt itself in the processor.
 
-3). Write the following C++ functions for a memory module.
+3). /*Write the following C++ functions for a memory module.
   * A void function named Initialize() that takes a fstream reference parameter and an int parameter
 named ram. It rewrites the file referenced by ram with 100 rows of 32-character strings of zero.
   *A string function named Read() that takes a fstream reference parameter and an int parameter named
@@ -39,75 +39,117 @@ named ram. It rewrites the file referenced by ram with 100 rows of 32-character 
    line starts from 0.
   * A void function named Write() that takes a fstream reference parameter, a string parameter and an int
    parameter named ram, data and addr. If addr is between 0 and 99 inclusively, the function writes data
-   on the line equal to addr of the file referenced by ram; otherwise, it does nothing.*/
+   on the line equal to addr of the file referenced by ram; otherwise, it does nothing.
+   */
 #include <iostream>
 #include <fstream>
 #include <cstdio>
 
 using namespace std;
 
-//This function loops over 100 times and writes a string of 32 zeroes in each line
 void Initialize(fstream &ram)
 {
-for(int i = 0; i < 100; i++) ram << "00000000000000000000000000000000\n";
+for(int f = 0; f < 100; f++) ram << "00000000000000000000000000000000\n";
 }
 
 string Read(fstream &ram, int addr)
 {
 string r;
-int i = 0;
+int f = 0;
 
-//setting the position of file pointer to the beginning
+
 ram.seekg(0, ios::beg);
 
-//If address is invalid return empty string
-if(addr >= 100)
-{
-return "";
-}
 
-//Iterate over each line until required line is found. If found return it to main
-while(ram >> r)
+  if(addr >= 100)
+  {
+return "";
+  }
+
+  while(ram >> r)
 {
-if(i == addr)
+  if(f == addr)
 {
-return r;
-}
-++i;
-}
+  return r;
+  }
+++f;
+  }
 }
 
 void Write(fstream &ram, string data, int addr)
 {
-//set the position of file pointer to the beginning
+
 ram.seekg(0, ios::beg);
 
-//If address is invalid return to main
 if(addr >= 100)
 {
 return;
 }
 
-//Create a temporary file
 fstream tempfile("temp.txt", ios::out);
-int i = 0;
+int f = 0;
 string r;
 
-//append newline to the input data
 data += '\n';
-
-//Iterate over each line until required line is found
 while(ram >> r)
 {
-//If line is found write data to the temp file
-if(i == addr) tempfile << data;
-
-//else write the contents of mem.txt to temporary file
+if(f == addr) tempfile << data;
 r += '\n';
 tempfile << r;
-i++;
+f++;
 }
+tempfile.close();
+ram.close();
+remove("Architecture.txt");
 
+rename("temp.txt", "Architecture.txt");
+ram.open("Architecture.txt", ios::in | ios::app);
+}
+int main()
+{
+fstream f("Architecture.txt", ios::in | ios::out);
+int Entry, addr;
+string s;
+Initialize(f);
+do
+{
+cout << "\n1. Read/ leer";
+cout << "\n2. Write/ Escribir";
+cout << "\n3. Exit/ salida" << endl;
+cout<< "Enter Desired Entry!!!" << endl;
+cin >> Entry;
+
+switch(Entry)
+{
+case 1:
+cout << "\nEnter address: ";
+cin >> addr;
+s = Read(f, addr);
+cout <<  "address data " << addr << ": " << s;
+break;
+
+case 2:
+cout << "\nEnter address: ";
+cin >> addr;
+cout << "Enter new data: ";
+cin >> s;
+Write(f, s, addr);
+cout << "\n Success!";
+break;
+
+case 3:
+cout << "\nAdios!";
+break;
+default:
+cout << "\nInvalid Entry!";
+break;
+}
+}while(Entry);
+
+f.close();
+    //PAUSE;
+return 0;
+}
 //close the two files
 tempfile.close();
 ram.close();
