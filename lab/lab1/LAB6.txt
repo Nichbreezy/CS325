@@ -1,0 +1,307 @@
+/*
+  Nicholas Weekes
+  CS 325
+  LAB 6
+
+  1). Define a generic PriorityQueue class that has the methods:
+◦ Enqueue(v,p) - adds an item v to the queue based off its priority p.
+ ◦ Dequeue() - removes front item from the queue.
+◦ Peek() - returns but does not remove the front item of the queue.
+◦ IsEmpty() - states if the queue is empty. */
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+//templated PriorityQueue class
+
+template<class N>
+
+class PriorityQueue{
+
+//an inner Node struct to represent data value, priority and next element on the queue
+struct Node{
+
+N value;
+
+int priority;
+
+Node* next;
+
+};
+//reference to front node
+Node* front;
+
+public: PriorityQueue(){
+
+front=NULL;
+}
+//adds a new element with a priority to the queue at appropriate pos
+void Enqueue(N value, int priority){
+
+//if priority is invalid, exiting method
+ if(priority<0 || priority>9){
+
+return;
+}
+
+//creating new node, setting values
+Node* node=new Node();
+
+node->value=value;
+
+node->priority=priority;
+
+node->next=NULL;
+
+//if queue is empty, adding as front node
+if(front==NULL){
+
+front=node;
+
+}
+else{
+
+//otherwise checking if new element can be added before front
+if(priority<=front->priority){
+
+//adding before front, updating front
+ node->next=front;
+
+front=node;
+
+return; //exiting method
+
+}
+
+//otherwise taking a reference to front
+Node* temp=front;
+
+//looping until next of temp is NULL
+while(temp->next!=NULL){
+
+//if priority is <= to the priority of next node
+if(priority<=temp->next->priority){
+
+//adding node between temp and temp.next
+node->next=temp->next;
+
+temp->next=node;
+
+return; //exiting method
+
+}
+
+//otherwise, advancing to next node
+temp=temp->next;
+
+}
+
+//if still not added, adding to the end.
+temp->next=node;
+
+}
+}
+
+//returns true if queue is empty, else not
+bool IsEmpty() const{
+
+return front==NULL;
+
+}
+
+//removes and returns the front element
+N Dequeue(){
+
+//checking if pq is not empty
+if(!IsEmpty()){
+
+//getting front value
+N value=front->value;
+
+//taking front node
+Node* temp=front;
+
+//advancing front
+front=front->next;
+
+//deleting memory occupied by previous front
+delete temp;
+
+//returning removed value
+return value;
+}
+
+//throwing an exception if pq is empty
+throw "Empty Queue!";
+}
+
+//returns the front element without removing
+N Peek(){
+
+if(!IsEmpty()){
+
+//returning value at front
+return front->value;
+
+}
+
+throw "Empty Queue!";
+
+}
+
+ //a destructor to deallocate memory occupied by pq before exiting to save memory
+~PriorityQueue()
+{
+
+//dequeueing until empty.
+while(!IsEmpty()){
+Dequeue();
+}
+
+   }
+
+};
+
+int main(){
+
+//creating a PriorityQueue of string values
+PriorityQueue<string> pq;
+pq.Enqueue("DJ",3); //will be added first
+pq.Enqueue("Kalid",4); //added after DJ
+pq.Enqueue("Brown",2); //added before Kalid
+pq.Enqueue("Chris",0); //added before Brown
+pq.Enqueue("Rihanna",11); //wont be added as priority is invalid
+
+//looping and displaying (& destroying) the queue, result should display "Chris Brown DJ Kalid"
+ while(!pq.IsEmpty()){
+
+string str=pq.Peek();
+
+cout<<str<<" ";
+
+pq.Dequeue();
+
+}
+
+cout<<endl;
+
+return 0;
+
+}
+/*2). Define a generic Stack class that has the methods:
+◦ Push() - adds an item to the stack.
+◦ Pop() - removes the top item from the stack.
+◦ Top() - returns but does not remove the top item of the stack. ◦ IsEmpty() - states if the stack is empty.*/
+//STACK.H
+#ifndef STACK_H
+#idefine STACK_H
+#include<string>
+using nsamespace std;
+class Stack{
+private:
+        struct item{
+          string name;
+          int value;
+        item * previous
+      };
+      item * stackPtr;
+
+public:
+  void Push(string name, int value) // Standard function to take and pass the arguement
+  void Pop(); // Pop the item off the stack
+  void Read( Item * r); // Displays content of the Item
+  void Print(); // Prints current content of the STACK
+  Stack(); // Calls the stack constructor
+  ~Stack(); // Called when the destructor is activated
+}
+//STACK.cpp
+#include <iostream>
+#include<string>
+#include<cstdlib>
+#include "STACK.h"
+using namespace std;
+Stack:: Stack(){// constructor defined
+stackPtr = NULL; // Stack pointer is not pointing to any items
+}
+Stack::~Stack(){ // Dconstructure defined
+item *  P1; // item Pointer 1
+item * P2; // item Pointer 2
+
+P1 = stackPtr; // P1 is assigned to the location of stackPtr
+while (P1!= NULL){ // Pointing to the top of the stack
+  P2 = P1; // Pointer 2 does the deleting and is assigned to P1
+  P1 = P1 -> Prev; // Makes P1 point the item below
+P2 -> Prev = NULL; // P2 item is not pointing to anything at the moment
+delete P2; // P2 deletes items on the stack
+  }
+}
+void stack::Push (string name, int value){ // defines Push
+item * n = new item; // Creating new item Called"n" & points to "n"
+n -> name= name; // Determine what variable "n" is pointing too
+n -> value = value; // Passing values into the new value
+if ( stackPtr = NULL)
+{
+  stackPtr= n;
+stackPtr -> prev = NULL; // Makes previous point equal NULL
+}
+  else{
+    n-> prev
+= stackPtr=n; // determines new top item
+  }
+}
+void Stack:: ReadItem(item*r) // display content to screen
+
+cout<< "------------------------\n";
+cout<< "name:" << r -> name << endl;
+cout<< "value:" << r -> value << endl;
+cout<< "------------------------\n";
+}
+void stack:: Pop(){ // Pop function
+if (stackPtr=NULL){ //Checks to see if pointer has anything.
+cout << "THere is nothing on the stack";
+}
+  else
+{
+  item * p= stackPtr;
+  ReadItem(P);
+  stackPtr = stackPtr -> prev; // Back Pointer
+  P  -> prev = NULL; //Makes item remove itself
+  delete P; // deletes the item on the top of the stack
+}
+}
+  void stack::print(){ // Print function
+    item * P = stackPtr;
+while (P!= NULL) // Verifying items in the stack if there is anything
+{
+  ReadItem(P);
+  P = P->prev;
+  }
+}
+//MAIN.cpp
+#include<cstdlib>
+#include<iostream>
+#include"stack.h"
+using namespace std;
+int int main(int argc, char const *argv[]) {
+
+int main(int argc, char* argv){
+  stack Nick;
+  Nick.Push("Nick",4);
+  Nick.Push("NIck",5);
+  Nick.Push("Food",1);
+  Nick.Push("Tunes",7);
+
+  Nick Print();
+  cout<< "Popping\n";
+  Nick.Pop();
+  cout<< "Popping\n";
+  Nick.Pop();
+  cout<< "Popping\n";
+  Nick.Pop();
+  cout<< "Popping\n";
+  Nick.Pop();
+  cout<< "Popping\n";
+  Nick.Pop();
+}
+}
